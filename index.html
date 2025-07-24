@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="David Cole" />
+  <meta name="description" content="Welcome to the portfolio of David A. Cole. Explore application materials, engineering projects, and creative services." />
+  <title>David Cole | Portfolio Landing Page</title>
+
+  <!-- Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="landingBackground">
+  <div id="starfield" class="starfield"></div>
+
+  <!-- Nav: none shown for landing -->
+  <div class="nav-container">
+    <nav class="nav-buttons"></nav>
+  </div>
+
+  <!-- Title -->
+  <h2><mark>Welcome to David Cole's Portfolio</mark></h2>
+
+  <!-- Circular Navigation -->
+  <section class="circle-nav">
+    <div class="pie-container">
+      <!-- 1. Application Materials -->
+      <div class="pie-slice" data-bg="cover-bg" data-zones="0-12x0-100,34-100x0-29,59-100x29-45,12-18x28-100,18-23x32-90,23-32x37-75">
+        <button onclick="location.href='content/applicationmaterial/index.html'">Application Materials</button>
+      </div>
+
+      <!-- 2. Engineering Portfolio -->
+      <div class="pie-slice" data-bg="career-bg" data-zones="60-100x10-60,20-50x50-80">
+        <button onclick="location.href='content/engineeringportfolio/index.html'">Engineering Portfolio</button>
+      </div>
+
+      <!-- 3. Creative Studio -->
+      <div class="pie-slice" data-bg="resume-bg" data-zones="40-70x10-40,75-100x60-90">
+        <button onclick="window.open('https://clixculture.media', '_blank')">Creative Studio</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Script: background & star zones -->
+  <script defer>
+    const starfield = document.getElementById("starfield");
+
+    function generateStars(zoneStr) {
+      starfield.innerHTML = "";
+      const zones = zoneStr.split(",").map(pair => {
+        const [x, y] = pair.split("x");
+        const [xMin, xMax] = x.split("-").map(Number);
+        const [yMin, yMax] = y.split("-").map(Number);
+        return { xMin, xMax, yMin, yMax };
+      });
+
+      let count = 0;
+      while (count < 40) {
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        const allowed = zones.some(z => x >= z.xMin && x <= z.xMax && y >= z.yMin && y <= z.yMax);
+        if (!allowed) continue;
+
+        const star = document.createElement("span");
+        star.className = "star";
+        star.style.top = `${y}%`;
+        star.style.left = `${x}%`;
+        star.style.width = star.style.height = `${(Math.random() * 2 + 1).toFixed(1)}px`;
+        star.style.animationDelay = `${(Math.random() * 6).toFixed(1)}s`;
+        starfield.appendChild(star);
+        count++;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const body = document.body;
+      const bgClasses = ["cover-bg", "career-bg", "resume-bg"];
+
+      document.querySelectorAll(".pie-slice").forEach(slice => {
+        const bgClass = slice.dataset.bg;
+        const zones = slice.dataset.zones;
+
+        slice.addEventListener("mouseenter", () => {
+          body.classList.remove(...bgClasses);
+          body.classList.add(bgClass);
+          if (zones) generateStars(zones);
+        });
+
+        slice.addEventListener("mouseleave", () => {
+          body.classList.remove(...bgClasses);
+          body.classList.add("landingBackground");
+          starfield.innerHTML = "";
+        });
+      });
+    });
+  </script>
+</body>
+</html>

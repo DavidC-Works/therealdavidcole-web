@@ -1,0 +1,36 @@
+# David Cole – Personal Portfolio Website
+
+Welcome to my personal portfolio website! This project showcases my front-end web development skills using modern HTML5, CSS3, and JavaScript. It is fully responsive, accessible, and designed to function as both a learning exercise and a professional showcase.
+
+---
+
+## 🌐 About This Project
+
+This site was built to:
+- Highlight my web development abilities  
+- Demonstrate real-world use of HTML/CSS/JavaScript  
+- Present personal content in an engaging, standards-compliant format  
+- Serve as a public-facing example of my work for potential collaborators and employers
+
+---
+
+## 🎯 Key Features
+
+- **Responsive Layout:** Built using mobile-first design principles
+- **Interactive Elements:** Email copy buttons, dynamic date rendering, and simple form scripting
+- **Media Integration:** Includes custom video, audio, and images
+- **CSS Visuals:** Animated starfield background using DOM and style manipulation
+- **Print-Friendly:** Optimized layout for printing with clean formatting
+- **Accessibility:** Uses semantic tags and logical navigation for screen readers
+
+---
+
+## 🛠️ Tech Stack & Tools
+
+- **Languages:** HTML5, CSS3, JavaScript (ES6)
+- **Editor:** Visual Studio Code
+- **Extensions Used:**
+  - Live Server (real-time preview)
+  - Prettier (code formatting)
+  - ESLint (JavaScript linting)
+  - Auto Rename Tag / Auto Close Tag

@@ -1,0 +1,160 @@
+/* === Global Reset === */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* === Starfield Background === */
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.star {
+  position: fixed;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(200,230,255,0.4) 60%, transparent 100%);
+  filter: drop-shadow(0 0 6px rgba(200,230,255,0.25));
+  animation: twinkle 4s infinite ease-in-out;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.star:nth-child(3n) { animation-duration: 3.5s; animation-delay: 0.5s; opacity: 0.3; }
+.star:nth-child(4n) { animation-duration: 4.7s; animation-delay: 1.2s; opacity: 0.6; }
+.star:nth-child(5n) { animation-duration: 5.2s; animation-delay: 2.1s; opacity: 0.75; }
+.star:nth-child(7n) { animation-duration: 6s;   animation-delay: 0.9s; opacity: 0.9; }
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(200,230,255,0.2));
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 12px rgba(255,255,255,0.9)) drop-shadow(0 0 24px rgba(200,230,255,0.6));
+  }
+}
+
+/* === Highlight Utility === */
+mark {
+  background: radial-gradient(circle, #f0ffff 0%, #b2ebf2 100%);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(178, 235, 242, 0.4);
+  font-weight: bold;
+}
+
+/* === Navigation System === */
+.nav-container {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.nav-buttons {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  pointer-events: auto;
+  transform: translateY(-50%);
+  z-index: 10;
+  transition: filter 0.3s ease;
+}
+
+.nav-arrow.left {
+  left: 8px;
+  border-width: 15px 20px 15px 0;
+  border-color: transparent white transparent transparent;
+}
+
+.nav-arrow.right {
+  right: 8px;
+  border-width: 15px 0 15px 20px;
+  border-color: transparent transparent transparent white;
+}
+
+.nav-arrow:hover {
+  filter: drop-shadow(0 0 5px white);
+}
+
+.home-button-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  background-image: url("../../assets/icons/rocket-icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: auto;
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+.home-button-icon::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10%);
+  width: 40px;
+  height: 40px;
+  background-image: url("../../assets/icons/rocket-flame.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  z-index: -1;
+}
+
+.home-button-icon:hover::before {
+  opacity: 1;
+}
+
+.home-button-icon:hover {
+  transform: scale(1.1);
+}
+
+/* === Fixed Header Title === */
+.header-emblem {
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  z-index: 5;
+}
+
+.header-emblem .main-title {
+  font-size: 1.2rem;
+  margin: 0;
+  text-align: left;
+}

@@ -1,0 +1,182 @@
+/* === Background Layer === */
+.resumeBackground::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("../../assets/images/SpaceForR.webp");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  filter: blur(3px);
+  opacity: 0.9;
+  z-index: -2;
+}
+
+.resumeBackground::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 25vh;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* === Main Layout === */
+.appContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+  padding: 4rem 1rem;
+}
+
+.floating-page {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.25);
+  max-width: 900px;
+  width: 100%;
+  padding: 2rem 3rem;
+  backdrop-filter: blur(6px);
+  position: relative;
+  z-index: 2;
+}
+
+#resume {
+  border-top: 4px solid #2baf5c;
+}
+
+#cover-letter {
+  border-top: 4px solid #337ab7;
+}
+
+/* === Typography & Structure === */
+.name-title {
+  text-align: center;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.contact-info {
+  text-align: center;
+  font-size: 1rem;
+  margin: 0.25rem 0 1rem;
+}
+
+.section-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  border-bottom: 1px solid #aaa;
+  padding-bottom: 4px;
+  margin: 2rem 0 1rem;
+  font-size: 1.2rem;
+}
+
+ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.3rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+/* === Email Copied Feedback === */
+#emailCopied {
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+  color: green;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+/* === Print Styles (Application Page Only) === */
+@media print {
+  html,
+  body {
+    background: white !important;
+    color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto;
+    overflow: visible;
+  }
+
+  .floating-page {
+    margin: 0 !important;
+    padding: 0.25in 0.75in 0.5in 0.75in !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+
+  .resumeBackground::before,
+  .resumeBackground::after,
+  .nav-container,
+  .nav-arrow,
+  .home-button-icon,
+  .main-title {
+    display: none !important;
+  }
+
+  address,
+  p {
+    margin-top: 0;
+    margin-bottom: 0.6em;
+    page-break-inside: avoid;
+  }
+}
+
+/* === Date Styling === */
+.right-aligned {
+  font-size: inherit;
+  float: right;
+  text-align: right;
+  margin-left: 1rem;
+}
+
+
+.cert-list {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  column-gap: 2rem;
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.cert-list li {
+  break-inside: avoid;
+  margin-bottom: 0.5rem;
+}
+
+.nav-arrow.home-left {
+  background-image: url("../../assets/images/SpaceForCG.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Override triangle styles */
+  border: none;
+  width: 3rem; /* or whatever fits your design */
+  height: 3rem;
+  transform: none; /* prevent inherited transforms */
+}
+
+
+
