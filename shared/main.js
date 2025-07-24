@@ -64,3 +64,64 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Inject Vercel Analytics tracking script dynamically
+const script = document.createElement("script");
+script.setAttribute("defer", "");
+script.setAttribute("src", "https://vercel.com/analytics/script.js");
+script.setAttribute("data-domain", "therealdavidcole.com"); // ← your domain
+document.head.appendChild(script);
+
+//Launching Page Hover Feature
+document.addEventListener("DOMContentLoaded", () => {
+  const starfield = document.getElementById("starfield");
+  const pieSlices = document.querySelectorAll(".pie-slice");
+  const body = document.body;
+
+  if (!starfield || !pieSlices.length) return; // Skip if not on landing page
+
+  const bgClasses = ["cover-bg", "career-bg", "resume-bg"];
+
+  function generateStars(zoneStr) {
+    starfield.innerHTML = "";
+    const zones = zoneStr.split(",").map(pair => {
+      const [x, y] = pair.split("x");
+      const [xMin, xMax] = x.split("-").map(Number);
+      const [yMin, yMax] = y.split("-").map(Number);
+      return { xMin, xMax, yMin, yMax };
+    });
+
+    let count = 0;
+    while (count < 40) {
+      const x = Math.random() * 100;
+      const y = Math.random() * 100;
+      const allowed = zones.some(z => x >= z.xMin && x <= z.xMax && y >= z.yMin && y <= z.yMax);
+      if (!allowed) continue;
+
+      const star = document.createElement("span");
+      star.className = "star";
+      star.style.top = `${y}%`;
+      star.style.left = `${x}%`;
+      star.style.width = star.style.height = `${(Math.random() * 2 + 1).toFixed(1)}px`;
+      star.style.animationDelay = `${(Math.random() * 6).toFixed(1)}s`;
+      starfield.appendChild(star);
+      count++;
+    }
+  }
+
+  pieSlices.forEach(slice => {
+    const bgClass = slice.dataset.bg;
+    const zones = slice.dataset.zones;
+
+    slice.addEventListener("mouseenter", () => {
+      body.classList.remove(...bgClasses);
+      body.classList.add(bgClass);
+      if (zones) generateStars(zones);
+    });
+
+    slice.addEventListener("mouseleave", () => {
+      body.classList.remove(...bgClasses);
+      body.classList.add("landingBackground");
+      starfield.innerHTML = "";
+    });
+  });
+});
