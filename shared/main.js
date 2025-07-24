@@ -65,11 +65,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Inject Vercel Analytics tracking script dynamically
-const script = document.createElement("script");
-script.setAttribute("defer", "");
-script.setAttribute("src", "https://vercel.com/analytics/script.js");
-script.setAttribute("data-domain", "therealdavidcole.com"); // ← your domain
-document.head.appendChild(script);
+// Vercel Analytics
+const vaTag = document.createElement("script");
+vaTag.innerHTML = `window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };`;
+document.head.appendChild(vaTag);
+
+const analyticsScript = document.createElement("script");
+analyticsScript.defer = true;
+analyticsScript.src = "/_vercel/insights/script.js";
+document.head.appendChild(analyticsScript);
+
+// Vercel Speed Insights (optional)
+const siTag = document.createElement("script");
+siTag.innerHTML = `window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };`;
+document.head.appendChild(siTag);
+
+const speedScript = document.createElement("script");
+speedScript.defer = true;
+speedScript.src = "/_vercel/speed-insights/script.js";
+document.head.appendChild(speedScript);
+
 
 //Launching Page Hover Feature
 document.addEventListener("DOMContentLoaded", () => {
